@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>SpringWebProject02</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- 全局参数，用于指定IOC配置文件的位置，如果不想配置这里，则把配置文件放在web/INFO里，就是这个web.xml文件的存放的同一个目录下 -->
+	<context-param>
+		<!-- 监听器的父类ContextLoader中有一个属性contextConfigLocation。该属性值保存着IOC容器配置文件applicationContext.xml的位置 -->
+		<param-name>contextConfigLocation</param-name>
+		<!-- classpath代表类路径 -->
+		<!-- 通常配置文件也不会是一个，而是按照两种方式取其一种进行拆分，1.按照业务功能模块拆分。2.按照三层拆分。 -->
+		<!-- 引用配置文件一共3种方式，第一种 -->
+		<param-value>
+		classpath:applicationContext.xml
+		</param-value>
+		<!-- 引用配置文件一共3种方式，第二种 -->
+		<!-- <param-value> classpath:applicationContext.xml, classpath:applicationContext-*.xml 
+			</param-value> -->
+	</context-param>
+
+	<!-- 添加监听器，TOMCAT在web项目启动时，会自动加在web.xml文件中的内容，自然也就会加在这个监听器，并加在IOC容器中的所有对象 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+</web-app>
